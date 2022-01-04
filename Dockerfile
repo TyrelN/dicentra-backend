@@ -24,5 +24,5 @@ USER myuser
 ENV PATH="/opt/venv/bin:$PATH"
 
 #production command
-CMD gunicorn config.wsgi:application --spew --workers=3 --threads=2 --bind 0.0.0.0:$PORT
+CMD gunicorn config.wsgi:application --spew --bind 0.0.0.0:$PORT
 
