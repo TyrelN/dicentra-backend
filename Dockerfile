@@ -16,18 +16,6 @@ RUN pip3 install poetry && poetry export -f requirements.txt --output requiremen
     && pip install -r requirements.txt && pip3 uninstall -y poetry
 
 FROM python:3.9-slim-buster as builder
-ARG ALLOWED_HOSTS
-ARG CLOUD_API_KEY
-ARG CLOUD_API_SECRET
-ARG CLOUD_NAME
-ARG CLOUDINARY_URL
-ARG CORS_ALLOWED
-ARG EMAIL_DOMAIN
-ARG EMAIL_HOST
-ARG EMAIL_HOST_PASSWORD
-ARG EMAIL_HOST_USER
-ARG SECRET_KEY
-ARG DATABASE_URL
 
 COPY --from=base /opt/venv /opt/venv
 COPY . .
@@ -37,5 +25,5 @@ USER myuser
 ENV PATH="/opt/venv/bin:$PATH"
 
 #production command
-CMD gunicorn config.wsgi:application --access-logfile - --log-level 'debug' --workers=3 --threads=2 --bind 0.0.0.0:$PORT
+CMD gunicorn config.wsgi:application --workers=3 --threads=2 --bind 0.0.0.0:$PORT
 
