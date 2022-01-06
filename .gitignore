@@ -8,6 +8,7 @@ __pycache__/
 node_modules
 
 Dockerfile.dev
+Dockerfile
 # Quasar core related directories
 .quasar
 /dist
