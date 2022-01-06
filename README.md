@@ -38,14 +38,15 @@ There were numerous technical challenges involved with the design of the project
 
 
 ## Areas in need of improvement
-There are some areas of the design that should be noted and considered with regards ot the design:
-* Automated Test Suite: A mixture of unit and integration tests are in the works to help the security and stability of the backend and ensure smoother updates in the future.
+There are some areas of the design that should be addressed:
+* Automated Test Suite: integration tests are in the works to help the security and stability of the backend, as well as enabling continuous integration.
 * Article image limit: Due to cpu limitations with affordable hosting platforms, the Article table should only upload up to three images per article post or patch.
-* Article simplicity: While other articles and blog posts may use a more elaborate content management system, such a system was not within scope for this project. A more simple approach of a simple Articles model with limited fields was deemed appropriate for animal rescues.
+* Article simplicity: While other articles and blog posts may use a more elaborate content management system, such a system was not within scope for this project. An approach of an Articles model with limited fields was considered plenty, and the strict limits would not impede the animal rescue.
 
 
 ## Additional Notes:
-* The project is deployed on [Railway](https://railway.app/) using the Dockerfile in the root of the repo
+* The api is deployed on [Heroku](https://www.heroku.com/what). The project has been deployed using both docker container registry and github integration, and is currently deployed with the latter.
+* The backend api was developed using Docker, with a postgres database attached to the backend in a multi-container setup using Docker-Compose
 
 
 ## References and Resources
