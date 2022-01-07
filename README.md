@@ -37,7 +37,7 @@ There were numerous technical challenges involved with the design of the project
 * To remove the need for seperate update and create functionality on the frontend, the current event table only allows for a single entry that is updated if one exists and created if one doesn't.
 
 
-## Areas in need of improvement
+## Caveats
 There are some areas of the design that should be addressed:
 * Automated Test Suite: integration tests are in the works to help the security and stability of the backend, as well as enabling continuous integration.
 * Article image limit: Due to cpu limitations with affordable hosting platforms, the Article table should only upload up to three images per article post or patch.
