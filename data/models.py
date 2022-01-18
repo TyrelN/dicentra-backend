@@ -240,7 +240,7 @@ class PetPost(models.Model):
         (NOTAVAILABLE, 'not available'),
         (ADOPTED, 'adopted'),
     ]
-    name = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=255, unique=True)
     description =  models.TextField(blank=True, null=True)
     age = models.CharField(max_length=100, blank=True)
