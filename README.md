@@ -1,4 +1,4 @@
-# Dicentra Backend
+# Dicentra (Backend)
 <div align="center"><img src="https://github.com/TyrelN/dicentra-frontend/blob/main/src/assets/nvars-logo-light.svg" width="300"/></div>
 
 ## About
@@ -29,7 +29,7 @@ A section for posting news-worthy or seasonal events that volunteers would like 
 
 Admin access is driven by the [djoser library](https://djoser.readthedocs.io/en/latest/getting_started.html) and allows for volunteers to submit updates to posts, delete posts and create new ones from the frontend.
 
-## Design logic and process
+## Design Choices
 There were numerous technical challenges involved with the design of the project. Some notable decisions made were as follows:
 * To reduce repetition with large forms, the contact information was included as an abstract base class, that each specific form extends with their own personal questions.
 * Since Django cannot store user submitted media (images) properly in production, [Cloudinary](https://cloudinary.com/) was implemented as a third-party cloud storage, which also allows for additional image optimization on image delivery via urls.
@@ -37,7 +37,7 @@ There were numerous technical challenges involved with the design of the project
 * To remove the need for seperate update and create functionality on the frontend, the current event table only allows for a single entry that is updated if one exists and created if one doesn't.
 
 
-## Areas in need of improvement
+## Caveats
 There are some areas of the design that should be addressed:
 * Automated Test Suite: integration tests are in the works to help the security and stability of the backend, as well as enabling continuous integration.
 * Article image limit: Due to cpu limitations with affordable hosting platforms, the Article table should only upload up to three images per article post or patch.
