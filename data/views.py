@@ -40,6 +40,8 @@ def handle_petpost_image(self, serializer):
 def handle_article_image(self, serializer):
     files = self.request.FILES
     if files:
+        #A multithreaded approach is taken here to eke out some performance on the IO side.
+        #The platform the project is deployed on only has 1 CPU core available, so multi-processing would not help.
         images = ("header_image", "content_image", "content_image_second")
         with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
             process_image = partial(compress_image, files)
