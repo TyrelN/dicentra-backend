@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi:application --workers=3 --threads=2
+web: gunicorn config.wsgi:application
