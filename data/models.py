@@ -146,9 +146,12 @@ class HelpWanted(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+    def __str___(self):
+        return self.title
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug_text = self.title
+            slug_addon = random_slug()
+            slug_text = self.title + '-' + slug_addon
             self.slug = slugify(slug_text, allow_unicode=True)
         super().save(*args, **kwargs)
 
@@ -181,15 +184,15 @@ class ArticlePost(models.Model):
     ]
     title = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
-    content = models.TextField(blank=True, null=True)
-    content_second = models.TextField(blank=True, null=True)
-    content_third = models.TextField(blank=True, null=True)
+    content = models.TextField(blank=True, default="")
+    content_second = models.TextField(blank=True, default="")
+    content_third = models.TextField(blank=True, default="")
     created_on = models.DateField(auto_now_add=True)
     header_image = models.ImageField(upload_to='images/', blank=True, null=True)
     content_image = models.ImageField(upload_to='images/', blank=True, null=True)
     content_image_second = models.ImageField(upload_to='images/', blank=True, null=True)
-    caption = models.CharField(max_length=255, blank = True, null=True, default='')
-    caption_second = models.CharField(max_length=255, blank = True, null=True, default='')
+    caption = models.CharField(max_length=255, blank = True, default='')
+    caption_second = models.CharField(max_length=255, blank = True, default='')
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, blank=True, null=True)
     url1= models.URLField(max_length=250, blank=True, null=True)
     url2= models.URLField(max_length=250, blank=True, null=True)
@@ -221,8 +224,8 @@ class ArticlePost(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             slug_addon = random_slug()
-            slugText = self.title + '-' + slug_addon
-            self.slug = slugify(slugText, allow_unicode=True)
+            slug_text = self.title + '-' + slug_addon
+            self.slug = slugify(slug_text, allow_unicode=True)
         super(ArticlePost, self).save(*args, **kwargs)
 
 class PetPost(models.Model):
@@ -242,9 +245,9 @@ class PetPost(models.Model):
     ]
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=255, unique=True)
-    description =  models.TextField(blank=True, null=True)
+    description =  models.TextField(blank=True, default="")
     age = models.CharField(max_length=100, blank=True)
-    available = models.CharField(max_length=150, choices=AVAILABLE_CHOICES, blank=True, null=True)
+    available = models.CharField(max_length=150, choices=AVAILABLE_CHOICES, blank=True, default="")
     color = models.CharField(max_length=100, blank=True)
     sex = models.CharField(max_length=6, choices = SEX_CHOICES, default = FEMALE);
     spayed = models.DateField(blank=True, null=True)
