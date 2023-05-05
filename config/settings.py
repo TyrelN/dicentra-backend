@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
-CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED')
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED', default=["*"])
 
 
 MIDDLEWARE = [
