@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
-CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED', default=["https://dicentra-frontend.vercel.app"])
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED', default=[""])
 
 
 MIDDLEWARE = [
@@ -92,7 +92,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
-     'default': env.db()
+     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
 }
 
 CLOUDINARY_STORAGE = {
