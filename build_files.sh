@@ -2,12 +2,6 @@
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
-
-# Install system dependencies
-apt-get update && apt-get install -y --no-install-recommends \
-    build-essential libpq-dev && \
-    rm -rf /var/lib/apt/lists/*
-
 # Create a virtual environment
 python3.9 -m venv /opt/venv
 source /opt/venv/bin/activate
