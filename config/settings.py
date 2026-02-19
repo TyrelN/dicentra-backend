@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django_filters',
-    'django.contrib.staticfiles',
     'cloudinary_storage',
+    'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
     'rest_framework.authtoken',
@@ -96,9 +96,9 @@ DATABASES = {
 }
 
 CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': env('CLOUDINARY_URL')
+    'CLOUDINARY_URL': env('CLOUDINARY_URL'),
+    'STATICFILES_MANIFEST_ROOT': BASE_DIR / 'manifest',
 }
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
