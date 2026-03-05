@@ -11,6 +11,9 @@ if [ -f pyproject.toml ]; then
 fi
 pip install -r requirements.txt
 
+# Ensure whitenoise is installed (for static files on Render)
+pip install whitenoise
+
 # Collect static files (uploads to Cloudinary if configured, or to staticfiles for WhiteNoise)
 python manage.py collectstatic --no-input
 
