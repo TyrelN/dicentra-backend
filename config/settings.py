@@ -37,6 +37,11 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=["*"])
 
+# Render: add service hostname to ALLOWED_HOSTS
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -63,6 +68,7 @@ CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED', default=["https://dicentra-front
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -161,9 +167,15 @@ SITE_NAME="NVARS"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL ='/static/'
-MEDIA_URL= '/media/'
-DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# WhiteNoise serves static files in production (Render, Heroku, etc.)
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

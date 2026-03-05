@@ -1,0 +1,33 @@
+# Render Blueprint - Infrastructure as Code
+# https://render.com/docs/infrastructure-as-code
+# Deploy via: Render Dashboard → Blueprints → New Blueprint Instance
+
+databases:
+  - name: dicentra-db
+    plan: free
+    databaseName: dicentra
+    user: dicentra
+
+services:
+  - type: web
+    plan: free
+    name: dicentra-backend
+    runtime: python
+
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dicentra-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      # Add these in Render Dashboard after creation:
+      # - CLOUDINARY_URL (from Cloudinary dashboard)
+      # - CORS_ALLOWED (comma-separated, e.g. https://dicentra-frontend.vercel.app,https://yoursite.com)
+      # - EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_DOMAIN (for password reset)
+      # - DEBUG=false (Render sets RENDER=true automatically)
